@@ -1,270 +1,117 @@
-<!DOCTYPE HTML>
-<html>
+[//]: # (Image References)
 
-<head>
-    <meta charset="utf-8">
-
-    <title>README.md (editing)</title>
-    <link id="favicon" rel="shortcut icon" type="image/x-icon" href="/static/base/images/favicon-file.ico?v=e2776a7f45692c839d6eea7d7ff6f3b2">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="stylesheet" href="/static/components/jquery-ui/themes/smoothness/jquery-ui.min.css?v=3c2a865c832a1322285c55c6ed99abb2" type="text/css" />
-    <link rel="stylesheet" href="/static/components/jquery-typeahead/dist/jquery.typeahead.min.css?v=7afb461de36accb1aa133a1710f5bc56" type="text/css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    
-<link rel="stylesheet" href="/static/components/codemirror/lib/codemirror.css?v=288352df06a67ee35003b0981da414ac">
-<link rel="stylesheet" href="/static/components/codemirror/addon/dialog/dialog.css?v=c89dce10b44d2882a024e7befc2b63f5">
-
-    <link rel="stylesheet" href="/static/style/style.min.css?v=4b4b8cb1e49605137f77fed041f8922b" type="text/css"/>
-    
-
-    <link rel="stylesheet" href="/custom/custom.css" type="text/css" />
-    <script src="/static/components/es6-promise/promise.min.js?v=f004a16cb856e0ff11781d01ec5ca8fe" type="text/javascript" charset="utf-8"></script>
-    <script src="/static/components/preact/index.js?v=00a2fac73c670ce39ac53d26640eb542" type="text/javascript"></script>
-    <script src="/static/components/proptypes/index.js?v=c40890eb04df9811fcc4d47e53a29604" type="text/javascript"></script>
-    <script src="/static/components/preact-compat/index.js?v=aea8f6660e54b18ace8d84a9b9654c1c" type="text/javascript"></script>
-    <script src="/static/components/requirejs/require.js?v=951f856e81496aaeec2e71a1c2c0d51f" type="text/javascript" charset="utf-8"></script>
-    <script>
-      require.config({
-          
-          urlArgs: "v=20220604185053",
-          
-          baseUrl: '/static/',
-          paths: {
-            'auth/js/main': 'auth/js/main.min',
-            custom : '/custom',
-            nbextensions : '/nbextensions',
-            kernelspecs : '/kernelspecs',
-            underscore : 'components/underscore/underscore-min',
-            backbone : 'components/backbone/backbone-min',
-            jed: 'components/jed/jed',
-            jquery: 'components/jquery/jquery.min',
-            json: 'components/requirejs-plugins/src/json',
-            text: 'components/requirejs-text/text',
-            bootstrap: 'components/bootstrap/js/bootstrap.min',
-            bootstraptour: 'components/bootstrap-tour/build/js/bootstrap-tour.min',
-            'jquery-ui': 'components/jquery-ui/jquery-ui.min',
-            moment: 'components/moment/min/moment-with-locales',
-            codemirror: 'components/codemirror',
-            termjs: 'components/xterm.js/xterm',
-            typeahead: 'components/jquery-typeahead/dist/jquery.typeahead.min',
-          },
-          map: { // for backward compatibility
-              "*": {
-                  "jqueryui": "jquery-ui",
-              }
-          },
-          shim: {
-            typeahead: {
-              deps: ["jquery"],
-              exports: "typeahead"
-            },
-            underscore: {
-              exports: '_'
-            },
-            backbone: {
-              deps: ["underscore", "jquery"],
-              exports: "Backbone"
-            },
-            bootstrap: {
-              deps: ["jquery"],
-              exports: "bootstrap"
-            },
-            bootstraptour: {
-              deps: ["bootstrap"],
-              exports: "Tour"
-            },
-            "jquery-ui": {
-              deps: ["jquery"],
-              exports: "$"
-            }
-          },
-          waitSeconds: 30,
-      });
-
-      require.config({
-          map: {
-              '*':{
-                'contents': 'services/contents',
-              }
-          }
-      });
-
-      // error-catching custom.js shim.
-      define("custom", function (require, exports, module) {
-          try {
-              var custom = require('custom/custom');
-              console.debug('loaded custom.js');
-              return custom;
-          } catch (e) {
-              console.error("error loading custom.js", e);
-              return {};
-          }
-      })
-
-    document.nbjs_translations = {"domain": "nbjs", "locale_data": {"nbjs": {"": {"domain": "nbjs"}}}};
-    document.documentElement.lang = navigator.language.toLowerCase();
-    </script>
-
-    
-    
-
-</head>
-
-<body class="edit_app "
- 
-data-base-url="/"
-data-file-path="dog-project/README.md"
-
-  
- 
-
-dir="ltr">
-
-<noscript>
-    <div id='noscript'>
-      Jupyter Notebook requires JavaScript.<br>
-      Please enable it to proceed. 
-  </div>
-</noscript>
-
-<div id="header">
-  <div id="header-container" class="container">
-  <div id="ipython_notebook" class="nav navbar-brand"><a href="/tree" title='dashboard'>
-      <img src='/static/base/images/logo.png?v=641991992878ee24c6f3826e81054a0f' alt='Jupyter Notebook'/>
-  </a></div>
-
-  
-
-<span id="save_widget" class="pull-left save_widget">
-    <span class="filename"></span>
-    <span class="last_modified"></span>
-</span>
+[image1]: ./images/sample_dog_output.png "Sample Output"
+[image2]: ./images/vgg16_model.png "VGG-16 Model Keras Layers"
+[image3]: ./images/vgg16_model_draw.png "VGG16 Model Figure"
 
 
-  
-  
-  
-  
+## Project Overview
 
-    <span id="login_widget">
-      
-    </span>
+Welcome to the Convolutional Neural Networks (CNN) project in the AI Nanodegree! In this project, you will learn how to build a pipeline that can be used within a web or mobile app to process real-world, user-supplied images.  Given an image of a dog, your algorithm will identify an estimate of the canine’s breed.  If supplied an image of a human, the code will identify the resembling dog breed.  
 
-  
+![Sample Output][image1]
 
-  
-  
-  </div>
-  <div class="header-bar"></div>
+Along with exploring state-of-the-art CNN models for classification, you will make important design decisions about the user experience for your app.  Our goal is that by completing this lab, you understand the challenges involved in piecing together a series of models designed to perform various tasks in a data processing pipeline.  Each model has its strengths and weaknesses, and engineering a real-world application often involves solving many problems without a perfect answer.  Your imperfect solution will nonetheless create a fun user experience!
 
-  
+## Project Instructions
 
-<div id="menubar-container" class="container">
-  <div id="menubar">
-    <div id="menus" class="navbar navbar-default" role="navigation">
-      <div class="container-fluid">
-          <p  class="navbar-text indicator_area">
-          <span id="current-mode" >current mode</span>
-          </p>
-        <button type="button" class="btn btn-default navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <i class="fa fa-bars"></i>
-          <span class="navbar-text">Menu</span>
-        </button>
-        <ul class="nav navbar-nav navbar-right">
-          <li id="notification_area"></li>
-        </ul>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">File</a>
-              <ul id="file-menu" class="dropdown-menu">
-                <li id="new-file"><a href="#">New</a></li>
-                <li id="save-file"><a href="#">Save</a></li>
-                <li id="rename-file"><a href="#">Rename</a></li>
-                <li id="download-file"><a href="#">Download</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Edit</a>
-              <ul id="edit-menu" class="dropdown-menu">
-                <li id="menu-find"><a href="#">Find</a></li>
-                <li id="menu-replace"><a href="#">Find &amp; Replace</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Key Map</li>
-                <li id="menu-keymap-default"><a href="#">Default<i class="fa"></i></a></li>
-                <li id="menu-keymap-sublime"><a href="#">Sublime Text<i class="fa"></i></a></li>
-                <li id="menu-keymap-vim"><a href="#">Vim<i class="fa"></i></a></li>
-                <li id="menu-keymap-emacs"><a href="#">emacs<i class="fa"></i></a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">View</a>
-              <ul id="view-menu" class="dropdown-menu">
-              <li id="toggle_header" title="Show/Hide the logo and notebook title (above menu bar)">
-              <a href="#">Toggle Header</a></li>
-              <li id="menu-line-numbers"><a href="#">Toggle Line Numbers</a></li>
-              </ul>
-            </li>
-            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Language</a>
-              <ul id="mode-menu" class="dropdown-menu">
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+### Instructions
 
-<div class="lower-header-bar"></div>
+1. Clone the repository and navigate to the downloaded folder.
+```	
+git clone https://github.com/udacity/dog-project.git
+cd dog-project
+```
 
+2. Download the [dog dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip).  Unzip the folder and place it in the repo, at location `path/to/dog-project/dogImages`. 
 
-</div>
+3. Download the [human dataset](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/lfw.zip).  Unzip the folder and place it in the repo, at location `path/to/dog-project/lfw`.  If you are using a Windows machine, you are encouraged to use [7zip](http://www.7-zip.org/) to extract the folder. 
 
-<div id="site">
+4. Donwload the [VGG-16 bottleneck features](https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/DogVGG16Data.npz) for the dog dataset.  Place it in the repo, at location `path/to/dog-project/bottleneck_features`.
 
+5. (Optional) __If you plan to install TensorFlow with GPU support on your local machine__, follow [the guide](https://www.tensorflow.org/install/) to install the necessary NVIDIA software on your system.  If you are using an EC2 GPU instance, you can skip this step.
 
-<div id="texteditor-backdrop">
-<div id="texteditor-container" class="container"></div>
-</div>
+6. (Optional) **If you are running the project on your local machine (and not using AWS)**, create (and activate) a new environment.
 
+	- __Linux__ (to install with __GPU support__, change `requirements/dog-linux.yml` to `requirements/dog-linux-gpu.yml`): 
+	```
+	conda env create -f requirements/dog-linux.yml
+	source activate dog-project
+	```  
+	- __Mac__ (to install with __GPU support__, change `requirements/dog-mac.yml` to `requirements/dog-mac-gpu.yml`): 
+	```
+	conda env create -f requirements/dog-mac.yml
+	source activate dog-project
+	```  
+	**NOTE:** Some Mac users may need to install a different version of OpenCV
+	```
+	conda install --channel https://conda.anaconda.org/menpo opencv3
+	```
+	- __Windows__ (to install with __GPU support__, change `requirements/dog-windows.yml` to `requirements/dog-windows-gpu.yml`):  
+	```
+	conda env create -f requirements/dog-windows.yml
+	activate dog-project
+	```
 
-</div>
+7. (Optional) **If you are running the project on your local machine (and not using AWS)** and Step 6 throws errors, try this __alternative__ step to create your environment.
 
+	- __Linux__ or __Mac__ (to install with __GPU support__, change `requirements/requirements.txt` to `requirements/requirements-gpu.txt`): 
+	```
+	conda create --name dog-project python=3.5
+	source activate dog-project
+	pip install -r requirements/requirements.txt
+	```
+	**NOTE:** Some Mac users may need to install a different version of OpenCV
+	```
+	conda install --channel https://conda.anaconda.org/menpo opencv3
+	```
+	- __Windows__ (to install with __GPU support__, change `requirements/requirements.txt` to `requirements/requirements-gpu.txt`):  
+	```
+	conda create --name dog-project python=3.5
+	activate dog-project
+	pip install -r requirements/requirements.txt
+	```
+	
+8. (Optional) **If you are using AWS**, install Tensorflow.
+```
+sudo python3 -m pip install -r requirements/requirements-gpu.txt
+```
+	
+9. Switch [Keras backend](https://keras.io/backend/) to TensorFlow.
+	- __Linux__ or __Mac__: 
+		```
+		KERAS_BACKEND=tensorflow python -c "from keras import backend"
+		```
+	- __Windows__: 
+		```
+		set KERAS_BACKEND=tensorflow
+		python -c "from keras import backend"
+		```
 
+10. (Optional) **If you are running the project on your local machine (and not using AWS)**, create an [IPython kernel](http://ipython.readthedocs.io/en/stable/install/kernel_install.html) for the `dog-project` environment. 
+```
+python -m ipykernel install --user --name dog-project --display-name "dog-project"
+```
 
+11. Open the notebook.
+```
+jupyter notebook dog_app.ipynb
+```
 
+12. (Optional) **If you are running the project on your local machine (and not using AWS)**, before running code, change the kernel to match the dog-project environment by using the drop-down menu (**Kernel > Change kernel > dog-project**). Then, follow the instructions in the notebook.
 
+__NOTE:__ While some code has already been implemented to get you started, you will need to implement additional functionality to successfully answer all of the questions included in the notebook. __Unless requested, do not modify code that has already been included.__
 
-    
+## Evaluation
 
+Your project will be reviewed by a Udacity reviewer against the CNN project [rubric](https://review.udacity.com/#!/rubrics/810/view).  Review this rubric thoroughly, and self-evaluate your project before submission.  All criteria found in the rubric must meet specifications for you to pass.
 
-<script src="/static/edit/js/main.min.js?v=ac978ed627b00fbfa328acc3f14b22fb" type="text/javascript" charset="utf-8"></script>
+## Project Submission
 
+When you are ready to submit your project, collect the following files and compress them into a single archive for upload:
+- The `dog_app.ipynb` file with fully functional code, all code cells executed and displaying output, and all questions answered.
+- An HTML or PDF export of the project notebook with the name `report.html` or `report.pdf`.
+- Any additional images used for the project that were not supplied to you for the project. __Please do not include the project data sets in the `dogImages/` or `lfw/` folders.  Likewise, please do not include the `bottleneck_features/` folder.__
 
-<script type='text/javascript'>
-  function _remove_token_from_url() {
-    if (window.location.search.length <= 1) {
-      return;
-    }
-    var search_parameters = window.location.search.slice(1).split('&');
-    for (var i = 0; i < search_parameters.length; i++) {
-      if (search_parameters[i].split('=')[0] === 'token') {
-        // remote token from search parameters
-        search_parameters.splice(i, 1);
-        var new_search = '';
-        if (search_parameters.length) {
-          new_search = '?' + search_parameters.join('&');
-        }
-        var new_url = window.location.origin + 
-                      window.location.pathname + 
-                      new_search + 
-                      window.location.hash;
-        window.history.replaceState({}, "", new_url);
-        return;
-      }
-    }
-  }
-  _remove_token_from_url();
-</script>
-</body>
+Alternatively, your submission could consist of the GitHub link to your repository.
 
-</html>
